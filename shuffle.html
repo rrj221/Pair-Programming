@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+press 'p' to pair students
+
+<p id="0">Group A: </p>
+<p id="2">Group B: </p>
+<p id="4">Group C: </p>
+<p id="6">Group D: </p>
+<p id="8">Group E: </p>
+<p id="10">Group F: </p>
+<p id="12">Group G: </p>
+<p id="14">Group H: </p>
+<p id="16">Group I: </p>
+<p id="18">Group J: </p>
+<p id="20">Group K: </p>
+<p id="22">Group L: </p>
+<p id="24">Group M: </p>
+<p id="26">Group N: </p>
+<p id="28">Group O: </p>
+
+<script>
+	var students = ["Alex Penachi", "Anda Szilagyi", "Andrew Frenkel", "Andrew Murriel", "Damola Alabi", "Daniel Lopez", "David Bermudez", "Dion Bailey", "Doug Laughlin", "Efthemios Hatzis", "Elsa Josephs", "Emad Kheiralla", "Eric Mok", "Ethan Favia", "Gabriel Ossers", "Heba Hassanein", "Jaime Valladolid", "Jamar Torres", "James Yu", "Jared Thomas", "Jennine Punzone", "Jenny Fong", "Kyla Stanislaus", "Nathaniel LaPier", "Orvin Welchez", "Paul Castro", "Ryan Jarrell", "Sid Johnston", "Stephanie Greco", "Viren Patel"];
+	var shuffledStudents = [];
+	var randomizedStudents = [];
+	var randomNum = 0;
+
+	var numbers = [];
+
+	var counter = 0;
+
+
+document.onkeyup = function(event) {
+
+	var userInput = String.fromCharCode(event.keyCode).toLowerCase();
+
+	if (userInput === 'p') {
+
+		// makes sure user is sure they want to refresh	
+		if (counter > 0){
+			var doubleCheck = confirm("Are you super sure you want to update the random pairs?");
+			if (doubleCheck === false) {
+				return;
+			}
+		}	
+
+		// creates array array of random numbers
+		while (numbers.length < students.length) {
+			randomNum = Math.floor(Math.random()*students.length);
+			if (numbers.indexOf(randomNum) === -1) {
+				numbers.push(randomNum);
+			}
+		}	
+
+		// creates new array of students with indexes lining up to the random numbers array
+		for (i = 0; i < students.length; i++) {
+			shuffledStudents.push(students[numbers[i]]);
+		} 
+
+		//fills in the HTML with pairs sequentially based on the randomly ordered array
+		var j = 0;
+		for (var i = 0; i < shuffledStudents.length - 1; i = i + 2) {
+			document.getElementById(i).innerHTML = "Group "+String.fromCharCode('A'.charCodeAt() + j)+": "+shuffledStudents[i]+", "+shuffledStudents[i+1];
+			console.log("i: ", i);
+			j++;
+			console.log(j);
+
+		}
+
+		// updates stuff
+		numbers = [];
+		shuffledStudents = [];
+		counter++;
+	}
+
+
+
+
+
+}
+
+
+</script>
+
+</body>
+</html>
